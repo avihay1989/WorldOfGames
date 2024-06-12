@@ -58,17 +58,13 @@ pipeline {
 
     post {
         always {
-            node {
-                script {
-                    sh "docker ps -q --filter 'ancestor=flask-scores-app' | xargs -r docker stop"
-                    sh "docker ps -a -q --filter 'ancestor=flask-scores-app' | xargs -r docker rm"
-                }
+            script {
+                sh "docker ps -q --filter 'ancestor=flask-scores-app' | xargs -r docker stop"
+                sh "docker ps -a -q --filter 'ancestor=flask-scores-app' | xargs -r docker rm"
             }
         }
         cleanup {
-            node {
-                cleanWs()
-            }
+            cleanWs()
         }
     }
 }
