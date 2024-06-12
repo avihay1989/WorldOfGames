@@ -2,13 +2,16 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('your-dockerhub-credentials-id') // Set up your DockerHub credentials in Jenkins
+        GITHUB_TOKEN = credentials('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') // Set up your GitHub token in Jenkins
+        DOCKERHUB_CREDENTIALS = credentials('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') // Set up your DockerHub credentials in Jenkins
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/avihaycognyte/WorldOfGames2.git', branch: 'master'
+                script {
+                    sh 'git clone https://${GITHUB_TOKEN}@github.com/avihay1989/WorldOfGames.git'
+                }
             }
         }
 
