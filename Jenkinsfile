@@ -59,14 +59,8 @@ pipeline {
     post {
         always {
             script {
-                // Surround the sh steps with a node block to ensure proper context
-                node {
-                    sh "docker ps -q --filter 'ancestor=flask-scores-app' | xargs -r docker stop"
-                    sh "docker ps -a -q --filter 'ancestor=flask-scores-app' | xargs -r docker rm"
-                }
-            }
-            // Surround the cleanWs step with a node block to ensure proper context
-            node {
+                sh "docker ps -q --filter 'ancestor=flask-scores-app' | xargs -r docker stop"
+                sh "docker ps -a -q --filter 'ancestor=flask-scores-app' | xargs -r docker rm"
                 cleanWs()
             }
         }
